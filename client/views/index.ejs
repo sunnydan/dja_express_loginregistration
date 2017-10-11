@@ -1,0 +1,72 @@
+<h1>Login and Registration</h1>
+<% if(!session.user){ %>
+    <div style="width: 100%; display: flex; justify-content: space-around;">
+        <div style="border: solid black 1px;">
+            <h3>Login</h3>
+            <% if(typeof(login_errors) != 'undefined' ) { %>
+                <span style="color: red;">User account matching email and password not found.</span>
+            <% } %>
+            <table>
+                <form action="/process_login" method="POST">
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input style="float: right;" type="submit" value="Submit"></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+        <div style="border: solid black 1px;">
+            <h3>Registration</h3>
+            <% if(typeof(registration_errors) != 'undefined' ) { %>
+                <% for (var x in registration_errors) { %>
+                    <span style="color: red;"><%= registration_errors[x] %></span>
+                    <br>
+                <% } %>
+            <% } %>
+            <table>
+                <form action="/process_registration" method="POST">
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email"></td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="first_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="last_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Birthday</td>
+                        <td><input type="date" name="birthday"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password</td>
+                        <td><input type="password" name="confirm_password"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input style="float: right;" type="submit" value="Submit"></td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </div>
+<% } else { %>
+    <div style="float: right;">
+        <a href="/users %>">User Profile</a>
+        <br>
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+<% } %>
